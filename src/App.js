@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+// React/JSX Element
+const userNameSpan = <h2> Gal Amouyal </h2>;
+
+const header = "Galamouyal@gmail.com";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <div className="App">{header}</div>;
+}
+
+function HeaderComponent() {
+  return <h1> This is my first component </h1>;
 }
 
 export default App;
