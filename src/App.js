@@ -1,35 +1,59 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-// React/JSX Element
-const userNameSpan = <h2> Gal Amouyal </h2>;
-
-const header = "Galamouyal@gmail.com";
-// Jsx elements can be placed inisde array
-// const arrayOfHeaders = [header, header, header];
+// JSX element
+const userEmail = "galamouya88@gmail.com";
 
 function App() {
-  const student2 = "Noam";
-  const numberOfStudents = 5;
-  const student3 = <li> Haim </li>;
-
   return (
     <div className="App">
-      <div>{header}</div>
-      <h2>
-        Students <span> {numberOfStudents} </span>
-      </h2>
-      <ul>
-        <li> Sapir </li>
-        <li> {student2} </li>
-        {student3}
-      </ul>
+      <div>{userEmail}</div>
+      <HeaderApp headerText="Home" />
+      <MoviesList moviesNames={["Scream 1", "Scream 2", "Scream 3"]} />
+      <HeaderApp headerText="About" />
+      <ImageApp />
+      <HeaderApp headerText="Contact us" />
+      <ImageApp src="https://i.pinimg.com/236x/83/f9/95/83f995c719319cadcc38ec3eda019a19--creepy-halloween-halloween-costumes.jpg" />
+
+      <HeaderApp />
     </div>
   );
 }
 
-function HeaderComponent() {
-  return <h1> This is my first component </h1>;
+// use className instead class
+
+function HeaderApp(props) {
+  const classNameFromCss = "uglyHeader";
+  // if (!props.headerText) return null;
+  const defaultText = "MISSING_HEADER_TEXT";
+  return (
+    <h2 style={{ color: props.color }} className={classNameFromCss}>
+      {props.headerText || defaultText}
+    </h2>
+  );
+}
+
+function ImageApp(props) {
+  // const { src } = props;
+  const src = props.src;
+  const defaultSrcImage =
+    "https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483097.jpg";
+  const srcParam = src || defaultSrcImage;
+  return <img src={srcParam} height={300} width={300} />;
+}
+
+function MoviesList(props) {
+  const { moviesNames = [] } = props;
+  return (
+    <ul>
+      {/* <li> Scream </li>
+      <li> Scream2 </li>
+      <li> Scream3 </li> */}
+      {moviesNames.map((movie) => {
+        return <li> {movie} </li>;
+      })}
+    </ul>
+  );
 }
 
 export default App;
