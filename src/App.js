@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
 
@@ -61,10 +60,9 @@ function MovieCard(props) {
   );
 }
 
-class MovieCardClass extends React.ReactComponent {
+class MovieCardClass extends React.Component {
   constructor(props) {
     super(props);
-    
   }
 
   render() {
