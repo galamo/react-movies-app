@@ -18,7 +18,7 @@ function App() {
       <HeaderApp headerText="Movies List" />
       <div className="container">
         <div className="row">
-          <MoviesList movies={moviesLocalData.Search} />
+          <MoviesListClass movies={moviesLocalData.Search} />
         </div>
       </div>
 
@@ -59,7 +59,13 @@ function MovieCard(props) {
     </div>
   );
 }
-
+function MoviesList(props) {
+  const { movies = [] } = props;
+  if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
+  return movies.map((movie) => {
+    return <MovieCard {...movie} />;
+  });
+}
 class MovieCardClass extends React.Component {
   constructor(props) {
     super(props);
@@ -88,12 +94,19 @@ class MovieCardClass extends React.Component {
   }
 }
 
-function MoviesList(props) {
-  const { movies = [] } = props;
-  if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
-  return movies.map((movie) => {
-    return <MovieCardClass {...movie} />;
-  });
+class MoviesListClass extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { movies = [] } = this.props;
+    if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
+
+    return movies.map((movie) => {
+      return <MovieCardClass {...movie} />;
+    });
+  }
 }
 
 function HeaderApp(props) {
