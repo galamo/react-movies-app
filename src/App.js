@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 
 // JSX element
@@ -14,22 +15,18 @@ function App() {
 
   return (
     <div className="App">
+      <div>{userEmail}</div>
+      <HeaderApp headerText="Movies List" />
       <div className="container">
         <div className="row">
-          <MovieCard
-            title={propsToMovieCard.title}
-            year={propsToMovieCard.year}
-            src={propsToMovieCard.src}
-          />
-          <MovieCard {...propsToMovieCard} />
-          <MovieCard title={"scream"} src="" year="2020-01-01" />
-          <MovieCard title={"scream"} src="" year="2020-01-01" />
-          <MovieCard title={"scream"} src="" year="2020-01-01" />
+          <MoviesList movies={moviesLocalData.Search} />
         </div>
       </div>
-      <div>{userEmail}</div>
+
       <HeaderApp headerText="Home" />
-      <MoviesList moviesNames={["Scream 1", "Scream 2", "Scream 3"]} />
+      <MoviesListLi
+        moviesNames={moviesLocalData.Search.map((movie) => movie.Title)}
+      />
       <HeaderApp headerText="About" />
       <ImageApp />
       <HeaderApp headerText="Contact us" />
@@ -42,22 +39,63 @@ function App() {
 
 // use className instead class
 
-const num = 2;
-
 function MovieCard(props) {
-  const { title, year, src } = props;
+  const { Title, Year, Poster, Type, imdbID } = props;
   return (
     <div className="card col-lg-3">
-      <ImageApp src={src} />
+      <ImageApp src={Poster} />
       <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{year}</p>
-        <a href="#" class="btn btn-primary">
+        <h5 className="card-title">{Title}</h5>
+        <p className="card-text">{Year}</p>
+        <p className="card-text">{Type}</p>
+        <p className="card-text">{imdbID}</p>
+
+        <a
+          href={`http://www.omdbapi.com/?apikey=ce8afb69&i=${imdbID}`}
+          className="btn btn-primary"
+        >
           Go to Movie
         </a>
       </div>
     </div>
   );
+}
+
+class MovieCardClass extends React.ReactComponent {
+  constructor(props) {
+    super(props);
+    
+  }
+
+  render() {
+    const { Title, Year, Poster, Type, imdbID } = this.props;
+    return (
+      <div className="card col-lg-3">
+        <ImageApp src={Poster} />
+        <div className="card-body">
+          <h5 className="card-title">{Title}</h5>
+          <p className="card-text">{Year}</p>
+          <p className="card-text">{Type}</p>
+          <p className="card-text">{imdbID}</p>
+
+          <a
+            href={`http://www.omdbapi.com/?apikey=ce8afb69&i=${imdbID}`}
+            className="btn btn-primary"
+          >
+            Go to Movie
+          </a>
+        </div>
+      </div>
+    );
+  }
+}
+
+function MoviesList(props) {
+  const { movies = [] } = props;
+  if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
+  return movies.map((movie) => {
+    return <MovieCardClass {...movie} />;
+  });
 }
 
 function HeaderApp(props) {
@@ -82,7 +120,7 @@ function ImageApp(props) {
   );
 }
 
-function MoviesList(props) {
+function MoviesListLi(props) {
   const { moviesNames = [] } = props;
   return (
     <ul>
