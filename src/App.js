@@ -23,7 +23,7 @@ function App() {
       <HeaderApp headerText="Movies List" />
       <div className="container">
         <div className="row">
-          <MoviesListClass movies={moviesLocalData.Search} />
+          <MoviesListClass movies={moviesLocalData.Search} showImage={true} />
         </div>
       </div>
 
@@ -39,6 +39,72 @@ function App() {
     </div>
   );
 }
+
+
+class AppClass extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { showImage: true, showOrHideString: "Hide", searchValue: "" }
+  }
+
+  toggleImages = () => {
+    const isImages = !this.state.showImage
+    const showOrHideString = isImages ? "Hide " : "Show "
+    this.setState({
+      ...this.state, showImage: isImages, showOrHideString
+    })
+  }
+
+  filterMovies = (movies) => {
+    if (!Array.isArray(movies)) return [];
+    if (!this.state.searchValue) return movies
+    return movies.filter(movie => movie.Title.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
+  }
+
+  render() {
+    console.log(this.state.searchValue)
+    const filteredMovies = this.filterMovies(moviesLocalData.Search)
+    return (
+      <div className="App">
+        <div>{userEmail}</div>
+        <HeaderApp headerText="Search" />
+        <div>
+          <div className="container">
+            <div className="row">
+              <input type={"text"} onChange={(e) => {
+                this.setState({
+                  ...this.state, searchValue: e.target.value
+                })
+              }} />
+
+            </div>
+          </div>
+        </div>
+        <HeaderApp headerText="Movies List" />
+        <button className={"btn btn-warning"} onClick={this.toggleImages}> {this.state.showOrHideString} Images </button>
+        <div className="container">
+          <div className="row">
+            <MoviesListClass movies={filteredMovies} showImage={this.state.showImage} />
+          </div>
+        </div>
+
+        <HeaderAppClass headerText="Home" />
+        <MoviesListLi
+          moviesNames={moviesLocalData.Search.map((movie) => movie.Title)}
+        />
+        <HeaderApp headerText="About" />
+        <ImageApp />
+        <HeaderApp headerText="Contact us" />
+        <ImageApp src="https://i.pinimg.com/236x/83/f9/95/83f995c719319cadcc38ec3eda019a19--creepy-halloween-halloween-costumes.jpg" />
+        <HeaderApp />
+      </div>
+    );
+  }
+
+}
+
+
 
 // use className instead class
 
@@ -67,7 +133,7 @@ function MoviesList(props) {
   const { movies = [] } = props;
   if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
   return movies.map((movie) => {
-    return <MovieCard {...movie} />;
+    return <MovieCard key={movie.imdbID} {...movie} />;
   });
 }
 
@@ -82,7 +148,7 @@ class MoviesListClass extends React.Component {
     if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
 
     return movies.map((movie) => {
-      return <MovieCardClass {...movie} />;
+      return <MovieCardClass key={movie.imdbID} {...movie} showImage={this.props.showImage} />;
     });
   }
 }
@@ -105,8 +171,8 @@ function MoviesListLi(props) {
       {/* <li> Scream </li>
       <li> Scream2 </li>
       <li> Scream3 </li> */}
-      {moviesNames.map((movie) => {
-        return <li> {movie} </li>;
+      {moviesNames.map((movie, index) => {
+        return <li key={movie + index}> {movie} </li>;
       })}
     </ul>
   );
@@ -197,4 +263,4 @@ var moviesLocalData = {
   Response: "True",
 };
 
-export default App;
+export default AppClass;

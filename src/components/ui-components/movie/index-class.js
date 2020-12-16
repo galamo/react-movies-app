@@ -33,11 +33,11 @@ export default class MovieCardClass extends React.Component {
     }
 
     render() {
-        console.log("RenderMovie executed")
-        const { Title, Year, Poster, Type, imdbID } = this.props;
+        console.log("RenderMovie executed", this.props.Title)
+        const { Title, Year, Poster, Type, imdbID, showImage } = this.props;
         return (
             <div style={{ background: this.state.cardColor }} className="card col-lg-3">
-                <ImageApp src={Poster} />
+                {showImage && <ImageApp src={Poster} />}
                 <div className="card-body">
                     <h5 className="card-title">{Title}</h5>
                     <p className="card-text">{Year}</p>
