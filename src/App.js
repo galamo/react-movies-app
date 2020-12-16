@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import HeaderAppClass from "./components/ui-components/header-app/index-class";
 
 // JSX element
 const userEmail = "galamouya88@gmail.com";
@@ -22,7 +23,7 @@ function App() {
         </div>
       </div>
 
-      <HeaderApp headerText="Home" />
+      <HeaderAppClass headerText="Home" />
       <MoviesListLi
         moviesNames={moviesLocalData.Search.map((movie) => movie.Title)}
       />
@@ -109,6 +110,10 @@ class MoviesListClass extends React.Component {
   }
 }
 
+
+
+
+
 function HeaderApp(props) {
   const classNameFromCss = "uglyHeader";
   // if (!props.headerText) return null;
@@ -119,6 +124,9 @@ function HeaderApp(props) {
     </h2>
   );
 }
+
+
+
 
 function ImageApp(props) {
   // const { src } = props;
