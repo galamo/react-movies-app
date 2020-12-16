@@ -1,6 +1,10 @@
 import React from "react";
 import "./App.css";
+
+import HeaderApp from "./components/ui-components/header-app";
 import HeaderAppClass from "./components/ui-components/header-app/index-class";
+import ImageApp from "./components/ui-components/image-app";
+import MovieCardClass from "./components/ui-components/movie/index-class";
 
 // JSX element
 const userEmail = "galamouya88@gmail.com";
@@ -31,7 +35,6 @@ function App() {
       <ImageApp />
       <HeaderApp headerText="Contact us" />
       <ImageApp src="https://i.pinimg.com/236x/83/f9/95/83f995c719319cadcc38ec3eda019a19--creepy-halloween-halloween-costumes.jpg" />
-
       <HeaderApp />
     </div>
   );
@@ -67,33 +70,7 @@ function MoviesList(props) {
     return <MovieCard {...movie} />;
   });
 }
-class MovieCardClass extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
-    const { Title, Year, Poster, Type, imdbID } = this.props;
-    return (
-      <div className="card col-lg-3">
-        <ImageApp src={Poster} />
-        <div className="card-body">
-          <h5 className="card-title">{Title}</h5>
-          <p className="card-text">{Year}</p>
-          <p className="card-text">{Type}</p>
-          <p className="card-text">{imdbID}</p>
-
-          <a
-            href={`http://www.omdbapi.com/?apikey=ce8afb69&i=${imdbID}`}
-            className="btn btn-primary"
-          >
-            Go to Movie
-          </a>
-        </div>
-      </div>
-    );
-  }
-}
 
 class MoviesListClass extends React.Component {
   constructor(props) {
@@ -114,30 +91,12 @@ class MoviesListClass extends React.Component {
 
 
 
-function HeaderApp(props) {
-  const classNameFromCss = "uglyHeader";
-  // if (!props.headerText) return null;
-  const defaultText = "MISSING_HEADER_TEXT";
-  return (
-    <h2 style={{ color: props.color }} className={classNameFromCss}>
-      {props.headerText || defaultText}
-    </h2>
-  );
-}
 
 
 
 
-function ImageApp(props) {
-  // const { src } = props;
-  const src = props.src;
-  const defaultSrcImage =
-    "https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483097.jpg";
-  const srcParam = src || defaultSrcImage;
-  return (
-    <img className="card-img-top" src={srcParam} height={300} width={300} />
-  );
-}
+
+
 
 function MoviesListLi(props) {
   const { moviesNames = [] } = props;
