@@ -1,5 +1,7 @@
 import React from "react"
 import ImageApp from "../image-app";
+import RankComponent from "../rank/index";
+
 
 
 export default class MovieCardClass extends React.Component {
@@ -34,7 +36,7 @@ export default class MovieCardClass extends React.Component {
 
     render() {
         console.log("RenderMovie executed", this.props.Title)
-        const { Title, Year, Poster, Type, imdbID, showImage } = this.props;
+        const { Title, Year, Poster, Type, imdbID, showImage, Rank } = this.props;
         return (
             <div style={{ background: this.state.cardColor }} className="card col-lg-3">
                 {showImage && <ImageApp src={Poster} />}
@@ -50,11 +52,16 @@ export default class MovieCardClass extends React.Component {
                     >
                         Go to Movie
                   </a>
-                    <button className={"btn btn-primary"} onClick={this.additionalInfoAction} > Additional info </button>
-                    <button className={"btn btn-primary"} onClick={this.changeColor} > change color </button>
-                    {this.state.isAdditionalInfoOpened && <div>
-                        Additional Info
-                    </div>}
+                    <div className="row mt-2">
+                        <button className={"btn btn-primary col-6"} onClick={this.additionalInfoAction} > More Info </button>
+                        <button className={"btn btn-primary col-6"} onClick={this.changeColor} > color </button>
+                    </div>
+                    <div className="row mt-2">
+                        <RankComponent rank={Rank} />
+                        <RankComponent rank={Rank} />
+                        <RankComponent rank={Rank} />
+                        <RankComponent rank={Rank} />
+                    </div>
                     {this.showAdditionalInfo()}
                 </div>
             </div>

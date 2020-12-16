@@ -72,7 +72,7 @@ class AppClass extends React.Component {
         <div>
           <div className="container">
             <div className="row">
-              <input type={"text"} onChange={(e) => {
+              <input type="text" onChange={(e) => {
                 this.setState({
                   ...this.state, searchValue: e.target.value
                 })
@@ -184,6 +184,7 @@ var moviesLocalData = {
       Title: "Avatar",
       Year: "2009",
       imdbID: "tt0499549",
+      Rank: 5,
       Type: "movie",
       Poster:
         "https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg",
@@ -193,6 +194,7 @@ var moviesLocalData = {
       Year: "2005–2008",
       imdbID: "tt0417299",
       Type: "series",
+      Rank: 4,
       Poster:
         "https://m.media-amazon.com/images/M/MV5BODc5YTBhMTItMjhkNi00ZTIxLWI0YjAtNTZmOTY0YjRlZGQ0XkEyXkFqcGdeQXVyODUwNjEzMzg@._V1_SX300.jpg",
     },
@@ -225,6 +227,7 @@ var moviesLocalData = {
       Year: "2019",
       imdbID: "tt10732794",
       Type: "series",
+      Rank: 2,
       Poster:
         "https://m.media-amazon.com/images/M/MV5BOGMxZDc1N2ItODI3NS00MDIwLWJkYzAtMTgyMDZlN2FlNGYzXkEyXkFqcGdeQXVyMjQ0OTYxOTc@._V1_SX300.jpg",
     },
@@ -248,6 +251,7 @@ var moviesLocalData = {
       Year: "2009",
       imdbID: "tt3051150",
       Type: "movie",
+      Rank: 3,
       Poster: "N/A",
     },
     {
@@ -255,6 +259,7 @@ var moviesLocalData = {
       Year: "2019",
       imdbID: "tt10736726",
       Type: "movie",
+      Rank: 1,
       Poster:
         "https://m.media-amazon.com/images/M/MV5BYWFlMmNhZGEtYmQwYS00MGEwLWFkYzItYmZlNjI4ZDY3YmZkXkEyXkFqcGdeQXVyNjgwNTk4Mg@@._V1_SX300.jpg",
     },
