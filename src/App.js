@@ -1,9 +1,11 @@
 import React from "react";
 import "./App.css";
+import FilterAppClass from "./components/ui-components/filter-app/index-class";
 
 import HeaderApp from "./components/ui-components/header-app";
 import HeaderAppClass from "./components/ui-components/header-app/index-class";
 import ImageApp from "./components/ui-components/image-app";
+import Movie from "./components/ui-components/movie";
 import MovieCardClass from "./components/ui-components/movie/index-class";
 
 // JSX element
@@ -62,6 +64,13 @@ class AppClass extends React.Component {
     return movies.filter(movie => movie.Title.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
   }
 
+  setSearchValue = (searchValueFromFilterComponent) => {
+    console.log("searchValueFromFilterComponent", searchValueFromFilterComponent)
+    this.setState({
+      ...this.state, searchValue: searchValueFromFilterComponent
+    })
+  }
+
   render() {
     console.log(this.state.searchValue)
     const filteredMovies = this.filterMovies(moviesLocalData.Search)
@@ -69,20 +78,9 @@ class AppClass extends React.Component {
       <div className="App">
         <div>{userEmail}</div>
         <HeaderApp headerText="Search" />
-        <div>
-          <div className="container">
-            <div className="row">
-              <input type="text" onChange={(e) => {
-                this.setState({
-                  ...this.state, searchValue: e.target.value
-                })
-              }} />
-
-            </div>
-          </div>
-        </div>
+        <FilterAppClass filterOutside={this.setSearchValue} />
         <HeaderApp headerText="Movies List" />
-        <button className={"btn btn-warning"} onClick={this.toggleImages}> {this.state.showOrHideString} Images </button>
+        <button className={"btn btn-warning"} onClick={() => { this.toggleImages() }}> {this.state.showOrHideString} Images </button>
         <div className="container">
           <div className="row">
             <MoviesListClass movies={filteredMovies} showImage={this.state.showImage} />
@@ -148,7 +146,7 @@ class MoviesListClass extends React.Component {
     if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
 
     return movies.map((movie) => {
-      return <MovieCardClass key={movie.imdbID} {...movie} showImage={this.props.showImage} />;
+      return <Movie key={movie.imdbID} {...movie} showImage={this.props.showImage} />;
     });
   }
 }

@@ -58,9 +58,6 @@ export default class MovieCardClass extends React.Component {
                     </div>
                     <div className="row mt-2">
                         <RankComponent rank={Rank} />
-                        <RankComponent rank={Rank} />
-                        <RankComponent rank={Rank} />
-                        <RankComponent rank={Rank} />
                     </div>
                     {this.showAdditionalInfo()}
                 </div>
