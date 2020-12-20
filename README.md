@@ -9,3 +9,13 @@
 - Run `npm install` in the main folder
 - Run `npm start`
 - Application is running - you can start Code.
+
+
+# ex 2
+
+- Create Rank component based on function component with the following state
+- The component should react to the inserted value
+- RankComponent
+- useState
+- input 
+- setInputState
