@@ -1,16 +1,20 @@
 import React, { useState } from "react"
 import ImageApp from "../image-app";
 import RankComponent from "../rank/index";
+import RankWithState from "../rank/rankWithState";
 
 
 export default function Movie(props) {
     // this.state.isAdditionalInfoOpened  this.setState    // this.state = {isAdditionalInfoOpened:false}
-    const [isAdditionalInfoOpened, setAdditionalInfo] = useState(true)
+    const [isAdditionalInfoOpened, setAdditionalInfo] = useState(false)
     const [cardColor, setCardColor] = useState(null)
 
     const showAdditionalInfo = () => {
         return isAdditionalInfoOpened ? <div>
-            {props.Type}
+            <div>
+                <div>Please Rank:</div>
+                <RankWithState />
+            </div>
         </div> : null
     }
 
@@ -43,6 +47,10 @@ export default function Movie(props) {
                 </div>
                 <div className="row mt-2">
                     <RankComponent rank={Rank} />
+
+                </div>
+                <div className="row mt-2">
+
                 </div>
                 {showAdditionalInfo()}
             </div>

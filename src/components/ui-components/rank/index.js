@@ -1,5 +1,5 @@
-import React from "react"
-import { StarFill } from 'react-bootstrap-icons';
+import React, { useState } from "react"
+import { StarFill, Star } from 'react-bootstrap-icons';
 
 
 
@@ -17,4 +17,7 @@ export default function RankComponent(props) {
         return starsIcons;
     }
 }
+
+
+
 
