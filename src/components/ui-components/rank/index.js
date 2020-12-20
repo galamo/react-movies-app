@@ -11,7 +11,7 @@ export default function RankComponent(props) {
     function _getStars() {
         const starsIcons = [];
         for (let index = 0; index < rank; index++) {
-            starsIcons.push(<StarFill />)
+            starsIcons.push(<StarFill key={index} />)
 
         }
         return starsIcons;

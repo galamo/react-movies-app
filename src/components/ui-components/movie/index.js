@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import ImageApp from "../image-app";
 import RankComponent from "../rank/index";
 import RankWithState from "../rank/rankWithState";
+import RankWithStateInput from "../rank/rankWithStateInput";
 
 
 export default function Movie(props) {
@@ -14,6 +15,7 @@ export default function Movie(props) {
             <div>
                 <div>Please Rank:</div>
                 <RankWithState />
+                <RankWithStateInput />
             </div>
         </div> : null
     }

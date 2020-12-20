@@ -7,7 +7,7 @@ import HeaderAppClass from "./components/ui-components/header-app/index-class";
 import ImageApp from "./components/ui-components/image-app";
 import Movie from "./components/ui-components/movie";
 import MovieCardClass from "./components/ui-components/movie/index-class";
-
+import axios from 'axios'
 // JSX element
 const userEmail = "galamouya88@gmail.com";
 
@@ -46,9 +46,24 @@ function App() {
 class AppClass extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = { showImage: true, showOrHideString: "Hide", searchValue: "" }
+    this.state = { showImage: true, showOrHideString: "Hide", searchValue: "", movies: [] }
   }
+
+
+  async componentDidMount() {
+    try {
+      console.log("====================================")
+      console.log("Component Mounted in the first Time")
+      console.log("====================================")
+      const { data } = await axios.get("http://www.omdbapi.com/?s=batman&plot=full&apikey=4f7462e2")
+      const movies = data.Search;
+      this.setState({ ...this.state, movies })
+    } catch (ex) {
+      alert("movies api failed")
+    }
+
+  }
+
 
   toggleImages = () => {
     const isImages = !this.state.showImage
@@ -72,8 +87,10 @@ class AppClass extends React.Component {
   }
 
   render() {
-    console.log(this.state.searchValue)
-    const filteredMovies = this.filterMovies(moviesLocalData.Search)
+    console.log("====================================")
+    console.log("Component Rendered")
+    console.log("====================================")
+    const filteredMovies = this.filterMovies(this.state.movies)
     return (
       <div className="App">
         <div>{userEmail}</div>

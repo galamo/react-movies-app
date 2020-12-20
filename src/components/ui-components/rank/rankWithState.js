@@ -14,7 +14,7 @@ export default function RankWithState() {
     function _getStars() {
         const starsIcons = [];
         for (let index = 0; index < 10; index++) {
-            const props = { onClick: () => setSelectedStars(index) }
+            const props = { key: index, onClick: () => setSelectedStars(index) }
             const currentStar = selectedStars >= index ? <StarFill {...props} /> : <Star {...props} />
             starsIcons.push(currentStar)
         }
