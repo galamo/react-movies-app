@@ -1,197 +1,44 @@
 import React from "react";
 import "./App.css";
-import FilterAppClass from "./components/ui-components/filter-app/index-class";
-
-import HeaderApp from "./components/ui-components/header-app";
-import HeaderAppClass from "./components/ui-components/header-app/index-class";
-import ImageApp from "./components/ui-components/image-app";
-import Movie from "./components/ui-components/movie";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
+import { Button } from "react-bootstrap"
 import MovieCardClass from "./components/ui-components/movie/index-class";
-import axios from 'axios'
-// JSX element
-const userEmail = "galamouya88@gmail.com";
+import AddMovie from "./components/ui-components/add-movie";
 
-function App() {
-  const propsToMovieCard = {
-    title: "the godfather",
-    year: "2020-05-05",
-    src:
-      "https://nofilmschool.com/sites/default/files/styles/facebook/public/the_godfather_part_iii.png?itok=87AlELaN",
-  };
+export default function App() {
 
-  return (
-    <div className="App">
-      <div>{userEmail}</div>
-      <HeaderApp headerText="Movies List" />
-      <div className="container">
-        <div className="row">
-          <MoviesListClass movies={moviesLocalData.Search} showImage={true} />
-        </div>
+  return (<Router>
+    <div className="container">
+      <h1 className="jumbotron"> Movies App  </h1>
+      <div className="row">
+        <Button> <Link to="/movies" style={{ color: "black" }}>Movies</Link> </Button>
+        <Button><Link to="/add-movie" style={{ color: "black" }}>Add Movie</Link> </Button>
       </div>
-
-      <HeaderAppClass headerText="Home" />
-      <MoviesListLi
-        moviesNames={moviesLocalData.Search.map((movie) => movie.Title)}
-      />
-      <HeaderApp headerText="About" />
-      <ImageApp />
-      <HeaderApp headerText="Contact us" />
-      <ImageApp src="https://i.pinimg.com/236x/83/f9/95/83f995c719319cadcc38ec3eda019a19--creepy-halloween-halloween-costumes.jpg" />
-      <HeaderApp />
-    </div>
-  );
-}
-
-
-class AppClass extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { showImage: true, showOrHideString: "Hide", searchValue: "", movies: [] }
-  }
-
-
-  async componentDidMount() {
-    try {
-      console.log("====================================")
-      console.log("Component Mounted in the first Time")
-      console.log("====================================")
-      const { data } = await axios.get("http://www.omdbapi.com/?s=batman&plot=full&apikey=4f7462e2")
-      const movies = data.Search;
-      this.setState({ ...this.state, movies })
-    } catch (ex) {
-      alert("movies api failed")
-    }
-
-  }
-
-
-  toggleImages = () => {
-    const isImages = !this.state.showImage
-    const showOrHideString = isImages ? "Hide " : "Show "
-    this.setState({
-      ...this.state, showImage: isImages, showOrHideString
-    })
-  }
-
-  filterMovies = (movies) => {
-    if (!Array.isArray(movies)) return [];
-    if (!this.state.searchValue) return movies
-    return movies.filter(movie => movie.Title.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
-  }
-
-  setSearchValue = (searchValueFromFilterComponent) => {
-    console.log("searchValueFromFilterComponent", searchValueFromFilterComponent)
-    this.setState({
-      ...this.state, searchValue: searchValueFromFilterComponent
-    })
-  }
-
-  render() {
-    console.log("====================================")
-    console.log("Component Rendered")
-    console.log("====================================")
-    const filteredMovies = this.filterMovies(this.state.movies)
-    return (
-      <div className="App">
-        <div>{userEmail}</div>
-        <HeaderApp headerText="Search" />
-        <FilterAppClass filterOutside={this.setSearchValue} />
-        <HeaderApp headerText="Movies List" />
-        <button className={"btn btn-warning"} onClick={() => { this.toggleImages() }}> {this.state.showOrHideString} Images </button>
-        <div className="container">
-          <div className="row">
-            <MoviesListClass movies={filteredMovies} showImage={this.state.showImage} />
-          </div>
-        </div>
-
-        <HeaderAppClass headerText="Home" />
-        <MoviesListLi
-          moviesNames={moviesLocalData.Search.map((movie) => movie.Title)}
-        />
-        <HeaderApp headerText="About" />
-        <ImageApp />
-        <HeaderApp headerText="Contact us" />
-        <ImageApp src="https://i.pinimg.com/236x/83/f9/95/83f995c719319cadcc38ec3eda019a19--creepy-halloween-halloween-costumes.jpg" />
-        <HeaderApp />
-      </div>
-    );
-  }
-
-}
-
-
-
-// use className instead class
-
-function MovieCard(props) {
-  const { Title, Year, Poster, Type, imdbID } = props;
-  return (
-    <div className="card col-lg-3">
-      <ImageApp src={Poster} />
-      <div className="card-body">
-        <h5 className="card-title">{Title}</h5>
-        <p className="card-text">{Year}</p>
-        <p className="card-text">{Type}</p>
-        <p className="card-text">{imdbID}</p>
-
-        <a
-          href={`http://www.omdbapi.com/?apikey=ce8afb69&i=${imdbID}`}
-          className="btn btn-primary"
-        >
-          Go to Movie
-        </a>
+      <div className="row">
+        <Switch>
+          <Route path="/movies">
+            <MoviesList movies={moviesLocalData.Search} />
+          </Route>
+          <Route path="/add-movie">
+            <AddMovie />
+          </Route>
+        </Switch>
       </div>
     </div>
-  );
+  </Router>)
 }
+
+
+
 function MoviesList(props) {
   const { movies = [] } = props;
   if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
   return movies.map((movie) => {
-    return <MovieCard key={movie.imdbID} {...movie} />;
+    return <MovieCardClass key={movie.imdbID} {...movie} />;
   });
 }
 
 
-class MoviesListClass extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { movies = [] } = this.props;
-    if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
-
-    return movies.map((movie) => {
-      return <Movie key={movie.imdbID} {...movie} showImage={this.props.showImage} />;
-    });
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-function MoviesListLi(props) {
-  const { moviesNames = [] } = props;
-  return (
-    <ul>
-      {/* <li> Scream </li>
-      <li> Scream2 </li>
-      <li> Scream3 </li> */}
-      {moviesNames.map((movie, index) => {
-        return <li key={movie + index}> {movie} </li>;
-      })}
-    </ul>
-  );
-}
 
 var moviesLocalData = {
   Search: [
@@ -283,4 +130,3 @@ var moviesLocalData = {
   Response: "True",
 };
 
-export default AppClass;

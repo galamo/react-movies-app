@@ -19,3 +19,14 @@
 - useState
 - input 
 - setInputState
+
+
+
+
+## Install React bootstrap
+-  `npm install react-bootstrap bootstrap`
+
+
+## Install React Router DOM
+-  `npm install react-router-dom`
+
