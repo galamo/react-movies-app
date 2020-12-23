@@ -30,3 +30,6 @@
 ## Install React Router DOM
 -  `npm install react-router-dom`
 
+# ex 3 
+- Create new Route which present the About page site.
+ 
