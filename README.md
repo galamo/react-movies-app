@@ -37,4 +37,24 @@
  # ex 4
 - Implement search API on input change
 
- 
+
+# ex 5 Homework
+- create drop down list
+- values: search, title, id
+- search will concat to the URL  s=value
+- title will concat to the URL  t=value
+- id will concat to the URL  i=value
+
+
+
+```html
+<Form.Group>
+  <Form.Control as="select" size="lg">
+    <option>Search</option>
+        <option>Title</option>
+            <option>Id</option>
+  </Form.Control>
+  <br />
+
+</Form.Group>
+`

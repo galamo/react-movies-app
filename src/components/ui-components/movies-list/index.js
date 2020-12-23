@@ -4,9 +4,9 @@ import MovieCardClass from "../movie/index-class";
 
 
 export default function MoviesList(props) {
-    const { movies = [] } = props;
+    const { movies = [], showImage } = props;
     if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
     return movies.map((movie) => {
-        return <MovieCardClass key={movie.imdbID} {...movie} />;
+        return <MovieCardClass key={movie.imdbID} showImage={showImage} {...movie} />;
     });
 }
