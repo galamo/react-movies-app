@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
 import { Button } from "react-bootstrap"
 import MovieCardClass from "./components/ui-components/movie/index-class";
 import AddMovie from "./components/ui-components/add-movie";
+import HomePage from "./components/containers/pages/home";
 
 export default function App() {
 
@@ -11,16 +12,16 @@ export default function App() {
     <div className="container">
       <h1 className="jumbotron"> Movies App  </h1>
       <div className="row">
-        <Button> <Link to="/movies" style={{ color: "black" }}>Movies</Link> </Button>
+        <Button> <Link to="/" style={{ color: "black" }}>Home Page</Link> </Button>
         <Button><Link to="/add-movie" style={{ color: "black" }}>Add Movie</Link> </Button>
       </div>
       <div className="row">
         <Switch>
-          <Route path="/movies">
-            <MoviesList movies={moviesLocalData.Search} />
-          </Route>
           <Route path="/add-movie">
             <AddMovie />
+          </Route>
+          <Route path="/">
+            <HomePage />
           </Route>
         </Switch>
       </div>
@@ -30,13 +31,7 @@ export default function App() {
 
 
 
-function MoviesList(props) {
-  const { movies = [] } = props;
-  if (!Array.isArray(movies)) return <div> Movies List is not Availble </div>;
-  return movies.map((movie) => {
-    return <MovieCardClass key={movie.imdbID} {...movie} />;
-  });
-}
+
 
 
 
