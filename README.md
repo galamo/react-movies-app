@@ -57,4 +57,9 @@
   <br />
 
 </Form.Group>
-`
+```
+
+# ex 6
+
+Try to generate Routes based on the Option exercise practice
+[{...},{...}] => [<Route>,<Route>,<Route>]
