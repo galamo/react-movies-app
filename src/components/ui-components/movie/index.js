@@ -3,12 +3,13 @@ import ImageApp from "../image-app";
 import RankComponent from "../rank/index";
 import RankWithState from "../rank/rankWithState";
 import RankWithStateInput from "../rank/rankWithStateInput";
-
+import { useHistory } from "react-router-dom"
 
 export default function Movie(props) {
     // this.state.isAdditionalInfoOpened  this.setState    // this.state = {isAdditionalInfoOpened:false}
     const [isAdditionalInfoOpened, setAdditionalInfo] = useState(false)
     const [cardColor, setCardColor] = useState(null)
+    const history = useHistory();
 
     const showAdditionalInfo = () => {
         return isAdditionalInfoOpened ? <div>
@@ -37,12 +38,15 @@ export default function Movie(props) {
 
                 <p className="card-text">{imdbID}</p>
 
-                <a
-                    href={`http://www.omdbapi.com/?apikey=ce8afb69&i=${imdbID}`}
+                <button
+                    onClick={() => {
+                        history.push(`/movie-page/${Title}`)
+                    }}
+
                     className="btn btn-primary"
                 >
                     Go to Movie
-              </a>
+                </button>
                 <div className="row mt-2">
                     <button className={"btn btn-primary col-6"} onClick={additionalInfoAction} > More Info </button>
                     <button className={"btn btn-primary col-6"} onClick={setCardColorAction} > color </button>

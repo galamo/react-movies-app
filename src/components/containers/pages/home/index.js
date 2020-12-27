@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import MoviesList from "../../../ui-components/movies-list"
 import axios from "axios"
 import { InputGroup, FormControl, Form, Alert } from "react-bootstrap"
+import WithLoading from "../../hoc/isLoading"
 
 const API_URL = "http://www.omdbapi.com/?plot=full&apikey=4f7462e2"
 
@@ -14,7 +15,7 @@ export default function HomePage() {
     const [inputValue, setInputValue] = useState(null)
     const [searchBy, setSearchBy] = useState(defaultItem.value)
     const [errorMessage, setErrorMessage] = useState(null)
-
+    const [isLoading, setIsLoading] = useState(false)
     // useEffect
     // param 1 - function to execute
     // param 2 - dependencies array
@@ -24,14 +25,21 @@ export default function HomePage() {
 
     async function callApi() {
         if (!inputValue) return;
+        setIsLoading(true)
         const { data } = await axios.get(`${API_URL}&${searchBy}=${inputValue}`)
         const { Response, Error: errorMessage } = data;
-        if (Response === "False") return setErrorMessage(errorMessage)
-        setErrorMessage(null)
-        setMovies(data.Search || [data])
+        if (Response === "False") {
+            setErrorMessage(errorMessage)
+        } else {
+            setErrorMessage(null)
+            setMovies(data.Search || [data])
+        }
+        setIsLoading(false)
     }
 
+    const MoviesListWithLoading = WithLoading(MoviesList)
     return <div className="container">
+
         {_getAlert(errorMessage)}
         <div className="row mt-3 mb-3">
             <div className="col-lg-9 p-0">
@@ -48,7 +56,7 @@ export default function HomePage() {
             </div>
         </div>
         <div className="row">
-            <MoviesList movies={movies} showImage={true} />
+            <MoviesListWithLoading isLoading={isLoading} movies={movies} showImage={true} />
         </div>
     </div>
 

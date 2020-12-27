@@ -63,3 +63,22 @@
 
 Try to generate Routes based on the Option exercise practice
 [{...},{...}] => [<Route>,<Route>,<Route>]
+
+
+# ex 7 - Homework 27-12
+
+1. Implement Movie Page ( transfer to the movie page IMDBid on the path params) - see the below code snippet we started
+2. on Movie page loading call API to fetch the Movie details
+3. present ALL the details from the API
+4. Use the Withloading HOC in the Movie page ( show loader till the movie data fetched / resolved)
+
+ 
+```javascript
+
+export default function MoviePage() {
+    const params = useParams()
+    console.log(params)
+    return <div> Movie Page: {params.movieTitle} </div>
+}
+
+```

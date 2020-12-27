@@ -5,6 +5,11 @@ import { Button } from "react-bootstrap"
 import MovieCardClass from "./components/ui-components/movie/index-class";
 import AddMovie from "./components/ui-components/add-movie";
 import HomePage from "./components/containers/pages/home";
+import NavBarApp from "./components/ui-components/nav-bar";
+import AboutPage from "./components/containers/pages/about";
+
+import { routes } from "./components/ui-components/nav-bar/index"
+import MoviePage from "./components/containers/pages/movie-page";
 
 export default function App() {
 
@@ -12,13 +17,18 @@ export default function App() {
     <div className="container">
       <h1 className="jumbotron"> Movies App  </h1>
       <div className="row">
-        <Button> <Link to="/" style={{ color: "black" }}>Home Page</Link> </Button>
-        <Button><Link to="/add-movie" style={{ color: "black" }}>Add Movie</Link> </Button>
+        <NavBarApp />
       </div>
       <div className="row">
         <Switch>
           <Route key="add-movie" path="/add-movie">
             <AddMovie />
+          </Route>
+          <Route key="about" path="/about-page">
+            <AboutPage />
+          </Route>
+          <Route key="movie-page" path="/movie-page/:movieTitle">
+            <MoviePage />
           </Route>
           <Route key="home" path="/">
             <HomePage />
