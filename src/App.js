@@ -17,10 +17,10 @@ export default function App() {
       </div>
       <div className="row">
         <Switch>
-          <Route path="/add-movie">
+          <Route key="add-movie" path="/add-movie">
             <AddMovie />
           </Route>
-          <Route path="/">
+          <Route key="home" path="/">
             <HomePage />
           </Route>
         </Switch>
