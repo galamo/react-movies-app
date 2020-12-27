@@ -14,6 +14,7 @@ export default function HomePage() {
     const [inputValue, setInputValue] = useState(null)
     const [searchBy, setSearchBy] = useState(defaultItem.value)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     // useEffect
     // param 1 - function to execute
@@ -24,12 +25,20 @@ export default function HomePage() {
 
     async function callApi() {
         if (!inputValue) return;
+        setIsLoading(true)
         const { data } = await axios.get(`${API_URL}&${searchBy}=${inputValue}`)
         const { Response, Error: errorMessage } = data;
-        if (Response === "False") return setErrorMessage(errorMessage)
-        setErrorMessage(null)
-        setMovies(data.Search || [data])
+        if (Response === "False") {
+            setErrorMessage(errorMessage)
+        }
+        else {
+            setErrorMessage(null)
+            setMovies(data.Search || [data])
+        }
+        setIsLoading(false)
     }
+
+    const MoviesListWithLoading = WithLoading(MoviesList)
 
     return <div className="container">
         {_getAlert(errorMessage)}
@@ -48,7 +57,7 @@ export default function HomePage() {
             </div>
         </div>
         <div className="row">
-            <MoviesList movies={movies} showImage={true} />
+            <MoviesListWithLoading isLoading={isLoading} movies={movies} showImage={true} />
         </div>
     </div>
 
@@ -68,4 +77,13 @@ function GetOptions(props) {
         const isSelected = optionItem.value === defaultItem.value ? "selected" : null
         return <option selected={isSelected} key={optionItem.key} value={optionItem.value}>{optionItem.innerText} </option>
     })
+}
+
+
+function WithLoading(Component) {
+    return function WihLoadingComponent(props) {
+        const { isLoading, ...restOfprops } = props
+        if (!isLoading) return <Component {...restOfprops} />;
+        return <p>Loading</p>;
+    };
 }
