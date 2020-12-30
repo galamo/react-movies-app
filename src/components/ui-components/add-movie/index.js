@@ -1,19 +1,20 @@
 import React, { useState } from "react"
 import { Form, Button, Dropdown } from "react-bootstrap"
-
+import { useDispatch } from "react-redux"
 
 export default function AddMovie(props) {
     const [movieName, setMovieName] = useState(null)
     const [movieImage, setMovieImage] = useState(null)
     const [movieYear, setMovieYear] = useState(new Date().toISOString().split("T")[0])
-
+    const dispatch = useDispatch();
     const saveMovie = () => {
-        const { addMovie } = props;
-        if (typeof addMovie !== 'function') return
-        addMovie({ Title: movieName, Poster: movieImage, Year: movieYear })
+        dispatch({ type: "ADD_MOVIE", payload: { Title: movieName, Poster: movieImage, Year: movieYear } })
+        // const { addMovie } = props;
+        // if (typeof addMovie !== 'function') return
+        // addMovie({ Title: movieName, Poster: movieImage, Year: movieYear })
     }
 
-    return (<Form>
+    return (<Form style={{ border: "2px red solid" }}>
         <Form.Group controlId="formBasicEmail">
             <Form.Label>Movie Name</Form.Label>
             <Form.Control type="text" placeholder="movieName" onChange={(e) => setMovieName(e.target.value)} />

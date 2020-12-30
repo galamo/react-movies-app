@@ -11,6 +11,7 @@ import AboutPage from "./components/containers/pages/about";
 import { routes } from "./components/ui-components/nav-bar/index"
 import MoviePage from "./components/containers/pages/movie-page";
 import CountryPage from "./components/containers/pages/country-page";
+import { useSelector } from "react-redux";
 
 export default function App() {
 
@@ -23,7 +24,10 @@ export default function App() {
       <div className="row">
         <Switch>
           <Route key="add-movie" path="/add-movie">
-            <AddMovie />
+            <div>
+              <AddMovie />
+              <ShowCreatedMovies />
+            </div>
           </Route>
           <Route key="about" path="/about-page">
             <AboutPage />
@@ -43,7 +47,16 @@ export default function App() {
   </Router>)
 }
 
-
+function ShowCreatedMovies() {
+  const globalState = useSelector(state => state)
+  console.log(globalState)
+  console.log("selector")
+  const { movies, numberOfMovies } = globalState;
+  return <div style={{ border: "2px red solid" }} className="mt-5">
+    <h1> show movies: {numberOfMovies} </h1>
+    {movies.map(m => <h2 key={m.Title}> {m.Title} </h2>)}
+  </div>
+}
 
 
 

@@ -94,3 +94,18 @@ export default function MoviePage() {
 5. Use the Withloading HOC in the Country page
 6. present the flag and more data 
 
+
+
+
+## Redux Lesson
+
+### Installations:
+1. `npm install redux`
+2. `npm install react-redux` 
+
+
+## ex 9 - redux
+1. Add Favorites Page
+2. Favorites page will present all the favorites movies
+3. add button to Movie card - add to favorites 
+4. AddMovie Page: will also add new movies to favorites
