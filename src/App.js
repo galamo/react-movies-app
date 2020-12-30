@@ -10,6 +10,7 @@ import AboutPage from "./components/containers/pages/about";
 
 import { routes } from "./components/ui-components/nav-bar/index"
 import MoviePage from "./components/containers/pages/movie-page";
+import CountryPage from "./components/containers/pages/country-page";
 
 export default function App() {
 
@@ -29,6 +30,9 @@ export default function App() {
           </Route>
           <Route key="movie-page" path="/movie-page/:id">
             <MoviePage />
+          </Route>
+          <Route key="country-page" path="/country-page/:country">
+            <CountryPage />
           </Route>
           <Route key="home" path="/">
             <HomePage />
