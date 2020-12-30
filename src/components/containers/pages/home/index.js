@@ -4,7 +4,7 @@ import axios from "axios"
 import { InputGroup, FormControl, Form, Alert } from "react-bootstrap"
 import WithLoading from "../../hoc/isLoading"
 
-const API_URL = "http://www.omdbapi.com/?plot=full&apikey=4f7462e2"
+export const API_URL = "http://www.omdbapi.com/?plot=full&apikey=4f7462e2"
 
 const params = [{ key: "search", value: "s", innerText: "Search", default: true },
 { key: "id", value: "i", innerText: "Id" }, { key: "title", value: "t", innerText: "Title" }]

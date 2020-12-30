@@ -82,3 +82,15 @@ export default function MoviePage() {
 }
 
 ```
+
+
+
+# ex 8 
+
+1. Implement Country Page - from movie page, present the Country Name
+2. when clicking on the Country name
+3. Navigate to Country page with the country name
+4. Call the following API to bring the country information: `https://restcountries.eu/rest/v2/name/COUNTRY_NAME`
+5. Use the Withloading HOC in the Country page
+6. present the flag and more data 
+

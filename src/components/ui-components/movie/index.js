@@ -40,7 +40,7 @@ export default function Movie(props) {
 
                 <button
                     onClick={() => {
-                        history.push(`/movie-page/${Title}`)
+                        history.push(`/movie-page/${imdbID}`) // /movie-page/:movieTitle
                     }}
 
                     className="btn btn-primary"

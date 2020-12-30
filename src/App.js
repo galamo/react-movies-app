@@ -27,7 +27,7 @@ export default function App() {
           <Route key="about" path="/about-page">
             <AboutPage />
           </Route>
-          <Route key="movie-page" path="/movie-page/:movieTitle">
+          <Route key="movie-page" path="/movie-page/:id">
             <MoviePage />
           </Route>
           <Route key="home" path="/">
