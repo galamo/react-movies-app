@@ -6,7 +6,9 @@ const initialState = {
     movies: [],
     moviesFromServer: [],
     numberOfMovies: 0,
-    favorites: []
+    favorites: [],
+    currentMovie: null,
+    isCurrentMovieLoading: true
 }
 const store = createStore(mainReducer)
 
@@ -28,9 +30,18 @@ function mainReducer(state = initialState, action) {
 
         case ACTIONS.MOVIES.GET_FROM_SERVER_DONE: {
             const movies = [...state.favorites, ...action.payload]
-
             return { ...state, moviesFromServer: movies };
         }
+
+        case ACTIONS.MOVIES.GET_MOVIE_DETAILS_DONE: {
+            return { ...state, currentMovie: action.payload };
+        }
+
+
+        case ACTIONS.MOVIES.IS_CURRENT_MOVIE_LOADING: {
+            return { ...state, isCurrentMovieLoading: action.payload };
+        }
+
 
         default: {
             return state;

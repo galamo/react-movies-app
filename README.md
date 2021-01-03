@@ -115,6 +115,9 @@ export default function MoviePage() {
 - getMovie - get single movie from our API
 - getCountry - get single country from our API
 
+- Convert all the application async operations in the component to outside async function 
+- support isLoading & errors ( pop up error modal)
+
 ```javascript
 async function Name()
  try{
@@ -127,3 +130,4 @@ async function Name()
    // IN PROGRESS END ACTION - set loader to false
  }
 ```
+
