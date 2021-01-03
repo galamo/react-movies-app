@@ -126,5 +126,4 @@ async function Name()
  }finaly{
    // IN PROGRESS END ACTION - set loader to false
  }
-
 ```
