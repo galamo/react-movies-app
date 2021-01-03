@@ -10,7 +10,9 @@ import css from "./style.module.css"
 export const routes = [
     { to: "/", title: "Home" },
     { to: "/add-movie", title: "Add Movie" },
-    { to: "/about-page", title: "About" }]
+    { to: "/about-page", title: "About" },
+    { to: "/favorites-page", title: "Favorites" },
+    { to: "/home2", title: "home2" }]
 
 export default function NavBarApp() {
     return <Nav

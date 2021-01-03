@@ -3,6 +3,9 @@ import MoviesList from "../../../ui-components/movies-list"
 import axios from "axios"
 import { InputGroup, FormControl, Form, Alert } from "react-bootstrap"
 import WithLoading from "../../hoc/isLoading"
+import { useDispatch, useSelector } from "react-redux"
+import { ACTIONS } from "../../../../redux-store/actions"
+import { getMovies } from "../../../../redux-store/async/getMovies.async"
 
 export const API_URL = "http://www.omdbapi.com/?plot=full&apikey=4f7462e2"
 
@@ -16,6 +19,9 @@ export default function HomePage() {
     const [searchBy, setSearchBy] = useState(defaultItem.value)
     const [errorMessage, setErrorMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const moviesFromServer = useSelector(state => state.moviesFromServer)
+    const dispatch = useDispatch()
+
     // useEffect
     // param 1 - function to execute
     // param 2 - dependencies array
@@ -25,16 +31,7 @@ export default function HomePage() {
 
     async function callApi() {
         if (!inputValue) return;
-        setIsLoading(true)
-        const { data } = await axios.get(`${API_URL}&${searchBy}=${inputValue}`)
-        const { Response, Error: errorMessage } = data;
-        if (Response === "False") {
-            setErrorMessage(errorMessage)
-        } else {
-            setErrorMessage(null)
-            setMovies(data.Search || [data])
-        }
-        setIsLoading(false)
+        getMovies(inputValue, searchBy)
     }
 
     const MoviesListWithLoading = WithLoading(MoviesList)
@@ -56,7 +53,7 @@ export default function HomePage() {
             </div>
         </div>
         <div className="row">
-            <MoviesListWithLoading isLoading={isLoading} movies={movies} showImage={true} />
+            <MoviesListWithLoading isLoading={isLoading} movies={moviesFromServer} showImage={true} />
         </div>
     </div>
 

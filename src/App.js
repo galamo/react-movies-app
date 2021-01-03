@@ -12,6 +12,10 @@ import { routes } from "./components/ui-components/nav-bar/index"
 import MoviePage from "./components/containers/pages/movie-page";
 import CountryPage from "./components/containers/pages/country-page";
 import { useSelector } from "react-redux";
+import FavoritesPage from "./components/containers/pages/favorites-page";
+import Home2 from "./components/containers/pages/home2";
+import { getMovies } from "./redux-store/async/getMovies.async";
+
 
 export default function App() {
 
@@ -37,6 +41,12 @@ export default function App() {
           </Route>
           <Route key="country-page" path="/country-page/:country">
             <CountryPage />
+          </Route>
+          <Route key="favorites-page" path="/favorites-page">
+            <FavoritesPage />
+          </Route>
+          <Route key="home2" path="/home2">
+            <Home2 />
           </Route>
           <Route key="home" path="/">
             <HomePage />

@@ -1,0 +1,9 @@
+export const ACTIONS = {
+
+    MOVIES: {
+        ADD_MOVIE: "ADD_MOVIE",
+        ADD_TO_FAVORITES: "ADD_TO_FAVORITES",
+        GET_FROM_SERVER_DONE: "GET_FROM_SERVER_DONE"
+    }
+
+}
