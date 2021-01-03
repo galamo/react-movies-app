@@ -109,3 +109,22 @@ export default function MoviePage() {
 2. Favorites page will present all the favorites movies
 3. add button to Movie card - add to favorites 
 4. AddMovie Page: will also add new movies to favorites
+
+# ex 10 - Async function
+- move the api calls from the components to async functions
+- getMovie - get single movie from our API
+- getCountry - get single country from our API
+
+```javascript
+async function Name()
+ try{
+   // IN PROGRESS ACTION - set loader to true
+   // axios request
+   // SUCCESS ACTION - fill movies state array
+ }catch(){
+   // FAILURE ACTION - pop up error modal
+ }finaly{
+   // IN PROGRESS END ACTION - set loader to false
+ }
+
+```

@@ -9,7 +9,7 @@ export async function getMovies(inputValue, searchBy) {
     try {
         if (!inputValue) return;
         //  SET LOADING
-        
+
         const { data } = await axios.get(`${API_URL}&${searchBy}=${inputValue}`)
         const { Response, Error: errorMessage } = data;
         if (Response === "False") {
@@ -23,3 +23,4 @@ export async function getMovies(inputValue, searchBy) {
         // ERROR ACTION
     }
 }
+
