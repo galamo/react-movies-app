@@ -24,6 +24,7 @@ export default class AddMovie extends React.Component {
         if (typeof addMovie !== 'function') return
         addMovie({ Title: movieName, Poster: movieImage, Year: movieYear })
     }
+    
     render() {
         return (<Form>
             <Form.Group controlId="formBasicEmail">

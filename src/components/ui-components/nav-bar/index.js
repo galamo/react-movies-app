@@ -12,6 +12,7 @@ export const routes = [
     { to: "/add-movie", title: "Add Movie" },
     { to: "/about-page", title: "About" },
     { to: "/favorites-page", title: "Favorites" },
+    { to: "/login-page", title: "Login" },
     { to: "/home2", title: "home2" }]
 
 export default function NavBarApp() {

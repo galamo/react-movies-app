@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import MoviesList from "../../../ui-components/movies-list"
-
+import React, { useEffect } from "react"
+import axios from "axios"
 
 export default function Home2() {
-    const movies = useSelector(state => state.moviesFromServer)
+
+    useEffect(() => {
+        callApi()
+    })
+    const callApi = async () => {
+        try {
+            const { data } = await axios.get("http://localhost:5000/statistics",
+                { headers: { "authorization": localStorage.getItem("token") || "token" } })
+            console.log(data)
+        } catch (ex) {
+            alert(ex.message)
+        }
+    }
+
     return <div className="container">
         <h1> Home2 </h1>
-        <div className="row">
-            <MoviesList movies={movies} showImage={true} />
-        </div>
     </div>
 }
 

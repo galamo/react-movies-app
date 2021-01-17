@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import FavoritesPage from "./components/containers/pages/favorites-page";
 import Home2 from "./components/containers/pages/home2";
 import { getMovies } from "./redux-store/async/getMovies.async";
+import LoginPage from "./components/containers/pages/login-page";
 
 
 export default function App() {
@@ -47,6 +48,9 @@ export default function App() {
           </Route>
           <Route key="home2" path="/home2">
             <Home2 />
+          </Route>
+          <Route key="login" path="/login-page">
+            <LoginPage />
           </Route>
           <Route key="home" path="/">
             <HomePage />
